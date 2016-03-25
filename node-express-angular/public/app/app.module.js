@@ -10,7 +10,8 @@
       'firebase',
 
       // Custome modules
-      'app.landing'
+      'app.landing',
+      'app.waitList'
     ]);
 
 })();
