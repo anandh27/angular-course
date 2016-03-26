@@ -1,14 +1,15 @@
 <form ng-submit="vm.addParty()" class="form-inline party-form">
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Name" required>
+    <input type="text" class="form-control" placeholder="Name" ng-model="vm.party.name"  required>
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Phone" required>
+    <input type="text" class="form-control" placeholder="Phone" ng-model="vm.party.phone"  required>
   </div>
   <div class="form-group">
-    <input type="number" class="form-control" placeholder="Size of Party">
+    <input type="number" class="form-control" placeholder="Size of Party" ng-model="vm.party.size">
   </div>
   <button type="submit" class="btn btn-primary" >Add party</button>
 </form>
 
+{{ vm.party }}
 {{ vm.parties }}
