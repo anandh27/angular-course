@@ -7,7 +7,6 @@
       'ngRoute',
 
       // Third party modules
-      'firebase',
 
       // Custome modules
       'app.landing',
