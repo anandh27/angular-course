@@ -10,6 +10,16 @@
   function waitListController($http){
     var vm = this;
 
+    function Party() {
+      this.name = '';
+      this.phone = '';
+      this.size = '';
+      this.done = false;
+      this.notified = false;
+    }
+
+    vm.party = new Party();
+
     $http.get('/api/v1/parties')
       .success(function(data) {
         vm.parties = data;
@@ -22,9 +32,7 @@
     vm.addParty = function() {
       $http.post('/api/v1/parties', {name: vm.party.name, phone: vm.party.phone, size: vm.party.size})
         .success(function(data) {
-          vm.party.name = '';
-          vm.party.phone = '';
-          vm.party.size = '';
+          vm.party = new Party();
 
           vm.parties = data;
           console.log(data);
