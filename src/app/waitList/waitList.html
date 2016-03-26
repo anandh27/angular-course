@@ -26,7 +26,9 @@
       <div><strong>{{ party.name }} {{ party.size}} people</strong></div>
       <div>{{ party.phone }}
     </td>
-    <td></td>
+    <td>
+      <div>{{ party.notified ? 'Yes' : 'No' }}</div>
+    </td>
     <td></td>
   </tr>
 </table>
