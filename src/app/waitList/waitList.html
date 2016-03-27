@@ -29,6 +29,8 @@
     <td>
       <div>{{ party.notified ? 'Yes' : 'No' }}</div>
     </td>
-    <td></td>
+    <td>
+      <button ng-click="vm.removeParty(party)"  class="btn btn-danger">Remove</button>
+    </td>
   </tr>
 </table>
