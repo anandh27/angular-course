@@ -41,5 +41,18 @@
           console.log(error);
         });
     };
+
+    vm.removeParty = removeParty;
+
+    function removeParty(party) {
+      $http.delete('api/v1/parties/' + party.id)
+        .success(function(data) {
+          vm.parties = data;
+          console.log(data);
+        })
+        .error(function(data) {
+          console.log('Error: ' + data);
+        });
+    }
   }
 })();

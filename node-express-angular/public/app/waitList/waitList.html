@@ -35,6 +35,8 @@
       <div>{{ party.phone }}</div>
     </td>
     <td>{{ party.notified ? 'Yes' : 'No' }}</td>
-    <td></td>
+    <td>
+      <button ng-click="vm.removeParty(party)" class="btn btn-danger">Remove</button>
+    </td>
   </tr>
 </table>
