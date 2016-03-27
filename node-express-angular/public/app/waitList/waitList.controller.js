@@ -43,9 +43,31 @@
     };
 
     vm.removeParty = removeParty;
+    vm.sendTextMessage = sendTextMessage;
 
     function removeParty(party) {
       $http.delete('api/v1/parties/' + party.id)
+        .success(function(data) {
+          vm.parties = data;
+          console.log(data);
+        })
+        .error(function(data) {
+          console.log('Error: ' + data);
+        });
+    }
+
+    function sendTextMessage(party) {
+      $http.post('/message', { name: party.name, phone: party.phone, size: party.size })
+        .success(function(data) {
+          party.notified = true;
+          console.log('Data: ' + data);
+        })
+        .error(function(data) {
+          console.log('Error: ' + data);
+        });
+
+      $http.put('/api/v1/parties/' + party.id +'/notify',
+                {name: party.name, phone: party.phone, size: party.size, notified: party.notifed, done: party.done})
         .success(function(data) {
           vm.parties = data;
           console.log(data);
