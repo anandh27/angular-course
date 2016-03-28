@@ -175,4 +175,40 @@ router.put('/api/v1/parties/:party_id/notify', function(req, res) {
 
 });
 
+router.put('/api/v1/parties/:party_id/done', function(req, res) {
+
+  var results = [];
+  var id = req.params.party_id;
+  var done = req.body.done;
+
+  pg.connect(connectionString, function(err, client, done) {
+    // Handle connection errors
+    if(err) {
+      done();
+      console.log(err);
+      return res.status(500).send(json({ success: false, data: err}));
+    }
+
+    client.query("UPDATE parties SET done=($1) WHERE id=($2);",[req.body.done, id]);
+
+    // SQL Query > Select Data
+    var query = client.query("SELECT * FROM parties ORDER BY id ASC");
+
+    // Stream results back one row at a time
+    query.on('row', function(row) {
+      results.push(row);
+    });
+
+    // After all data is returned, close connection and return results
+    query.on('end', function() {
+      done();
+      console.log(results);
+      return res.json(results);
+    });
+
+  });
+
+});
+
+
 module.exports = router;

@@ -44,6 +44,7 @@
 
     vm.removeParty = removeParty;
     vm.sendTextMessage = sendTextMessage;
+    vm.toggleDone = toggleDone;
 
     function removeParty(party) {
       $http.delete('api/v1/parties/' + party.id)
@@ -71,6 +72,17 @@
         .success(function(data) {
           vm.parties = data;
           console.log(data);
+        })
+        .error(function(data) {
+          console.log('Error: ' + data);
+        });
+    }
+
+    function toggleDone(party){
+      $http.put('/api/v1/parties/' + party.id +'/done',
+                {done: party.done})
+        .success(function(data) {
+          vm.parties = data;
         })
         .error(function(data) {
           console.log('Error: ' + data);
