@@ -1,6 +1,6 @@
 <form ng-sumbit="vm.register()" class="form-signin">
-  <h2></h2>
-  <input>
-  <input>
-  <button></button>
+  <h2 class="form-signin-heading">Sign up</h2>
+  <input ng-model="vm.user.email" type="email" class="form-control" placeholder="email address" required autofocus>
+  <input ng-model="vm.user.password" type="password" class="form-control" placeholder="password" required>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
 </form>
