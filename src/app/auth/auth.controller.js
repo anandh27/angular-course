@@ -18,6 +18,7 @@
     vm.register = register;
 
     function register(user) {
+      console.log(user);
       return firebaseAuthObject.$createUser(user);
     }
   }
