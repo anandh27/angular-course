@@ -16,6 +16,7 @@
     };
 
     vm.register = register;
+    vm.login = login;
 
     function register(user) {
       return firebaseAuthObject.$createUser(user)
@@ -25,6 +26,10 @@
         .catch(function(error) {
           console.log(error);
         });
+    }
+
+    function login(user) {
+      return firebaseAuthObject.$authWithPassword(user);
     }
   }
 })();
