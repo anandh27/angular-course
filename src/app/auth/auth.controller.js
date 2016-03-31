@@ -20,8 +20,8 @@
 
     function register(user) {
       return firebaseAuthObject.$createUser(user)
-        .then(function(user) {
-          console.log(user);
+        .then(function() {
+          vm.login(user);
         })
         .catch(function(error) {
           console.log(error);
