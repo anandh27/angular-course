@@ -19,11 +19,12 @@
 
     vm.register = register;
     vm.login = login;
+    vm.logout = logout;
 
     function register(user) {
       return firebaseAuthObject.$createUser(user)
-        .then(function(user) {
-          console.log(user);
+        .then(function() {
+          vm.login(user);
         })
         .catch(function(error) {
           console.log(error);
@@ -39,6 +40,12 @@
         .catch(function(error) {
           console.log(error);
         });
+    }
+
+    function logout() {
+      console.log("Logging Out");
+      firebaseAuthObject.$unauth();
+      $location.path('/');
     }
 
   }
