@@ -7,10 +7,12 @@
       'ngRoute',
 
       // Third party modules
+      'firebase',
 
       // Custome modules
       'app.landing',
-      'app.waitList'
+      'app.waitList',
+      'app.auth'
     ]);
 
 })();

@@ -1,13 +1,15 @@
 (function() {
+  'use strict';
+
   angular
     .module('app.auth')
     .controller('AuthController', AuthController);
 
-  AuthController$inject = ['$location', '$firebaseAuth'];
+  AuthController.$inject = ['$location', '$firebaseAuth'];
 
   function AuthController($location, $firebaseAuth) {
     var vm = this;
-    var firebaseReference = new Firebase('https://waitandeat-thomas.firebaseio.com/');
+    var firebaseReference = new Firebase('https://waitandeat-tja-node.firebaseio.com/');
     var firebaseAuthObject = $firebaseAuth(firebaseReference);
 
     vm.user = {
@@ -17,12 +19,11 @@
 
     vm.register = register;
     vm.login = login;
-    vm.logout = logout;
 
     function register(user) {
       return firebaseAuthObject.$createUser(user)
-        .then(function() {
-          vm.login(user);
+        .then(function(user) {
+          console.log(user);
         })
         .catch(function(error) {
           console.log(error);
@@ -40,10 +41,5 @@
         });
     }
 
-    function logout() {
-      console.log("logging out");
-      firebaseAuthObject.$unauth();
-      $location.path('/');
-    }
   }
 })();
