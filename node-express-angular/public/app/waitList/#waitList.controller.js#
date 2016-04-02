@@ -28,10 +28,12 @@
       });
 
     vm.party = new Party();
+    vm.test = getAllParties();
     vm.addParty = addParty;
     vm.removeParty = removeParty;
     vm.sendTextMessage = sendTextMessage;
     vm.toggleDone = toggleDone;
+
 
     function addParty() {
       $http.post('/api/v1/parties', {name: vm.party.name, phone: vm.party.phone, size: vm.party.size})
