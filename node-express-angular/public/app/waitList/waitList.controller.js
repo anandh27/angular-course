@@ -5,18 +5,10 @@
     .module('app.waitList')
     .controller('waitListController', waitListController);
 
-  waitListController.$inject = ['$http'];
+  waitListController.$inject = ['$http', 'partyService'];
 
-  function waitListController($http){
+  function waitListController($http, partyService) {
     var vm = this;
-
-    function Party() {
-      this.name = '';
-      this.phone = '';
-      this.size = '';
-      this.done = false;
-      this.notified = false;
-    }
 
     $http.get('/api/v1/parties')
       .success(function(data) {
@@ -27,16 +19,17 @@
         console.log('Error: ' + error);
       });
 
-    vm.party = new Party();
+    vm.party = new partyService.Party();
     vm.addParty = addParty;
     vm.removeParty = removeParty;
     vm.sendTextMessage = sendTextMessage;
     vm.toggleDone = toggleDone;
 
+
     function addParty() {
       $http.post('/api/v1/parties', {name: vm.party.name, phone: vm.party.phone, size: vm.party.size})
         .success(function(data) {
-          vm.party = new Party();
+          vm.party = new partyService.Party();
 
           vm.parties = data;
           console.log(data);
