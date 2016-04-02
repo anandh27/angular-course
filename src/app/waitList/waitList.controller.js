@@ -3,15 +3,14 @@
     .module('app.waitList')
     .controller('waitListController', waitListController);
 
-  waitListController.$inject = ['$firebaseArray', 'FIREBASE_URL', 'partyService'];
+  waitListController.$inject = ['FIREBASE_URL', 'partyService'];
 
-  function waitListController($firebaseArray, FIREBASE_URL, partyService) {
+  function waitListController(FIREBASE_URL, partyService) {
     var vm = this;
-    var fireParties = new Firebase(FIREBASE_URL + 'parties');
     var fireTextMessages = new Firebase(FIREBASE_URL + 'textMessages');
 
     vm.newParty = new partyService.Party();
-    vm.parties = $firebaseArray(fireParties);
+    vm.parties = partyService.parties;
     vm.addParty = addParty;
     vm.removeParty = removeParty;
     vm.sendTextMessage = sendTextMessage;
