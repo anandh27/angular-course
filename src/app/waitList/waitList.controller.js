@@ -3,12 +3,12 @@
     .module('app.waitList')
     .controller('waitListController', waitListController);
 
-  waitListController.$inject = ['$firebaseArray'];
+  waitListController.$inject = ['$firebaseArray', 'FIREBASE_URL'];
 
-  function waitListController($firebaseArray) {
+  function waitListController($firebaseArray, FIREBASE_URL) {
     var vm = this;
-    var fireParties = new Firebase('https://waitandeat-thomas.firebaseio.com/parties');
-    var fireTextMessages = new Firebase('https://waitandeat-thomas.firebaseio.com/textMessages');
+    var fireParties = new Firebase(FIREBASE_URL + 'parties');
+    var fireTextMessages = new Firebase(FIREBASE_URL + 'textMessages');
 
     function Party() {
       this.name = '';
