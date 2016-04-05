@@ -27,28 +27,13 @@
 
 
     function addParty() {
-      $http.post('/api/v1/parties', {name: vm.party.name, phone: vm.party.phone, size: vm.party.size})
-        .success(function(data) {
-          vm.party = new partyService.Party();
-
-          vm.parties = data;
-          console.log(data);
-        })
-        .error(function(error) {
-          console.log(error);
-        });
-    };
+      partyService.addParty(vm, partyService.Party);
+    }
 
     function removeParty(party) {
-      $http.delete('api/v1/parties/' + party.id)
-        .success(function(data) {
-          vm.parties = data;
-          console.log(data);
-        })
-        .error(function(data) {
-          console.log('Error: ' + data);
-        });
+      partyService.removeParty(party, vm);
     }
+
 
     function sendTextMessage(party) {
       $http.post('/message', { name: party.name, phone: party.phone, size: party.size })
@@ -59,6 +44,7 @@
         .error(function(data) {
           console.log('Error: ' + data);
         });
+
 
       $http.put('/api/v1/parties/' + party.id +'/notify',
                 {name: party.name, phone: party.phone, size: party.size, notified: party.notifed, done: party.done})
