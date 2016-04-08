@@ -20,4 +20,4 @@
       return firebaseAuthObject.$createUser(user);
     }
   }
-});
+})();
