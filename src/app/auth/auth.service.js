@@ -10,6 +10,7 @@
   function authService($firebaseAuth, firebaseDataService) {
     var firebaseAuthObject = $firebaseAuth(firebaseDataService.root);
     var service = {
+      firebaseAuthObject: firebaseAuthObject,
       register: register,
       login: login,
       logout: logout,
