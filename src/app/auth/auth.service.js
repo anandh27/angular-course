@@ -10,7 +10,9 @@
   function authService($firebaseAuth, firebaseDataService) {
     var firebaseAuthObject = $firebaseAuth(firebaseDataService.root);
     var service = {
-      register: register
+      register: register,
+      login: login,
+      logout: logout
     };
 
     return service;
@@ -18,6 +20,14 @@
     ///////////////
     function register(user) {
       return firebaseAuthObject.$createUser(user);
+    }
+
+    function login(user) {
+      return firebaseAuthObject.$authWithPassword(user);
+    }
+
+    function logout() {
+      return firebaseAuthObject.$unauth();
     }
   }
 })();
