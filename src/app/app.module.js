@@ -11,6 +11,7 @@
 
       // Custom modules
       'app.landing',
+      'app.layout',
       'app.waitList',
       'app.auth',
       'app.core'
