@@ -15,5 +15,15 @@
       'app.waitList',
       'app.auth',
       'app.core'
-    ]);
+    ])
+    .config(configFunction);
+
+  configFunction.$inject = ['$routeProvider'];
+
+  function configFunction($routeProvider) {
+    $routeProvider.otherwise({
+      redirectTo: '/'
+    });
+  }
+
 })();
