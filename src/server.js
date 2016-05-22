@@ -8,15 +8,15 @@ var firebaseSecret = 'p3aRM8jaXRqQkoXftfkloFbChReV5kqH3ycziAyF';
 var firebaseURL = 'https://waitandeat-thomas.firebaseio.com/';
 
 // // Mailgun info.
-// var mailgunApiKey = '';
-// var mailgunDomain = '';
+var mailgunApiKey = 'key-79bdc9ac8a1a2e8311b68449b875e49c';
+var mailgunDomain = 'sandboxba9300d5b6da4cb594bd75af6159d246.mailgun.org';
 
 // Create references for libraries.
 var express = require('express');
 var http = require('http');
 var Firebase = require('firebase');
 var twilio = require('twilio');
-// var mailgun = require('mailgun-js')({apiKey: mailgunApiKey, domain: mailgunDomain});
+var mailgun = require('mailgun-js')({apiKey: mailgunApiKey, domain: mailgunDomain});
 
 // Express server setup.
 var router = express();
@@ -53,24 +53,24 @@ textMessagesRef.on("child_added", function(snapshot) {
 });
 
 // // Create a reference to emails.
-// var emailsRef = firebaseRef.child('emails');
+var emailsRef = firebaseRef.child('emails');
 
-// // Listen for new objects pushed to emailsRef.
-// emailsRef.on("child_added", function(snapshot) {
-//   var email = snapshot.val();
-//   var emailData = {
-//     from: '<postmaster@'  + mailgunDomain + '>',
-//     to: email.emailAddress,
-//     subject: 'Welcome to Wait and Eat',
-//     text: 'Thanks for signing up for Wait and Eat!'
-//   };
-//   mailgun.messages().send(emailData, function(error, body) {
-//     console.log(body);
-//     if (error) {
-//       console.log(error);
-//     };
-//   });
-// });
+// Listen for new objects pushed to emailsRef.
+emailsRef.on("child_added", function(snapshot) {
+  var email = snapshot.val();
+  var emailData = {
+    from: '<postmaster@'  + mailgunDomain + '>',
+    to: email.emailAddress,
+    subject: 'Welcome to Wait and Eat',
+    text: 'Thanks for signing up for Wait and Eat!'
+  };
+  mailgun.messages().send(emailData, function(error, body) {
+    console.log(body);
+    if (error) {
+      console.log(error);
+    };
+  });
+});
 
 server.listen(process.env.PORT || 8080, process.env.IP || "0.0.0.0", function(){
   var addr = server.address();
