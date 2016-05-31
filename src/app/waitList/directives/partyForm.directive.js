@@ -9,7 +9,10 @@
     return {
       templateUrl: 'app/waitList/directives/partyForm.html',
       restrict: 'E',
-      scope: {},
+      scope: {
+        parties: '='
+      },
+      bindToController: true,
       controller: PartyFormController,
       controllerAs: 'vm'
     };
