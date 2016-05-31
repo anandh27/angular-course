@@ -7,9 +7,18 @@
 
   function gzPartyForm() {
     return {
-      templateUrl: 'app/waitlist/directives/partyForm.html',
-      restrict: 'E'
+      templateUrl: 'app/waitList/directives/partyForm.html',
+      restrict: 'E',
+      scope: {},
+      controller: PartyFormController,
+      controllerAs: 'vm'
     };
+  }
+
+  PartyFormController.$inject = ['partyService'];
+
+  function PartyFormController(partyService) {
+
   }
 
 })();
