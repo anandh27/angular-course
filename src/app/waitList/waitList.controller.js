@@ -3,31 +3,14 @@
     .module('app.waitList')
     .controller('waitListController', waitListController);
 
-  waitListController.$inject = ['partyService', 'textMessageService', 'user'];
+  waitListController.$inject = ['partyService', 'user'];
 
-  function waitListController(partyService, textMessageService, user) {
+  function waitListController(partyService, user) {
     var vm = this;
 
     console.log(user);
 
     vm.parties = partyService.getPartiesByUser(user.uid);
-    vm.removeParty = removeParty;
-    vm.sendTextMessage = sendTextMessage;
-    vm.toggleDone = toggleDone;
-
-    function removeParty(party) {
-      vm.parties.$remove(party);
-    }
-
-    function sendTextMessage(party) {
-      textMessageService.sendTextMessage(party, vm.parties);
-    }
-
-    function toggleDone(party) {
-      vm.parties.$save(party);
-
-      console.log(party);
-    }
 
   }
 })();
